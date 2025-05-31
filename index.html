@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Cambodia - Documentary</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --secondary-color: #1a1a2e;
+            --accent-color: #e94560;
+            --text-color: #f1f1f1;
+            --dark-text: #333;
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --font-normal: 'Kantumruy Pro', sans-serif;
+            --font-header: 'Moul', 'Kantumruy Pro', sans-serif;
+            --font-model: 'Moulpali', 'Kantumruy Pro', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Moul';
+            src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/moul/Moul-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Moulpali';
+            src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/moulpali/Moulpali-Regular.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-normal);
+            color: var(--text-color);
+            background: var(--bg-gradient);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .language-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-switch label {
+            margin: 0 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none; /* Prevent text selection */
+        }
+
+        .language-switch label:hover {
+            color: var(--primary-color);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .khmer-content {
+            display: none;
+        }
+
+        .english-content {
+            display: block;
+        }
+
+        input:checked ~ .english-content {
+            display: none;
+        }
+
+        input:checked ~ .khmer-content {
+            display: block;
+        }
+
+        /* Header Styles */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 30px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        h1 {
+            font-family: var(--font-header);
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        /* About Section */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: var(--font-header);
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 1s ease-out 0.3s forwards;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 1s ease-out 0.3s forwards;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Features Section */
+        .features {
+            background: rgba(0, 0, 0, 0.2);
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            padding: 150px 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card:nth-child(1) {
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .feature-card:nth-child(2) {
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .feature-card:nth-child(3) {
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-family: var(--font-model);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* Gallery Section */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Team Section */
+        .team {
+            background: rgba(0, 0, 0, 0.2);
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            padding: 150px 20px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-member {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .team-member:nth-child(1) {
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .team-member:nth-child(2) {
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .team-member:nth-child(3) {
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-name {
+            font-family: var(--font-model);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .member-role {
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: var(--font-normal);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text, .about-image {
+                min-width: 100%;
+            }
+
+            .features {
+                clip-path: polygon(0 2%, 100% 0, 100% 98%, 0 100%);
+                padding: 80px 20px;
+            }
+
+            .team {
+                clip-path: polygon(0 2%, 100% 0, 100% 98%, 0 100%);
+                padding: 80px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switch - Fixed Version -->
+    <div class="language-switch">
+        <label for="language-toggle">ភាសាខ្មែរ</label>
+        <label class="switch">
+            <input type="checkbox" id="language-toggle">
+            <span class="slider"></span>
+        </label>
+        <label for="language-toggle">English</label>
+    </div>
+
+    <!-- English Content -->
+    <div class="english-content">
+        <!-- Header -->
+        <header>
+            <video class="header-video" autoplay muted loop>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-ruins-of-an-ancient-temple-12150-large.mp4" type="video/mp4">
+            </video>
+            <img src="https://cdn-icons-png.flaticon.com/512/8451/8451357.png" alt="Documentary Logo" class="logo">
+            <div class="header-content">
+                <h1>Ancient Cambodia</h1>
+                <p class="tagline">Uncovering the lost secrets of the Khmer Empire</p>
+                <div>
+                    <a href="#watch" class="btn">Watch Now</a>
+                    <a href="#trailer" class="btn btn-outline">View Trailer</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About the Documentary</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>This groundbreaking documentary explores the rich history and architectural marvels of the Khmer Empire, which ruled much of Southeast Asia from the 9th to the 15th centuries.</p>
+                    <p>Through stunning cinematography and expert interviews, we uncover the secrets behind Angkor Wat and other magnificent temples, revealing the advanced engineering, artistic achievements, and spiritual depth of this ancient civilization.</p>
+                    <p>Join us on a journey through time as we piece together the story of one of history's most remarkable empires.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Angkor Wat Temple">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2 class="section-title">Documentary Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3 class="feature-title">Ancient Architecture</h3>
+                    <p>Explore the engineering marvels of Khmer temples and urban planning that still astonish architects today.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="feature-title">Hydraulic System</h3>
+                    <p>Discover the sophisticated water management system that sustained the empire's agricultural prosperity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="feature-title">Lost History</h3>
+                    <p>Uncover the reasons behind the empire's decline and the mysteries that remain unsolved.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2 class="section-title">Gallery</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Angkor Wat">
+                    <div class="gallery-caption">
+                        <h3>Angkor Wat</h3>
+                        <p>The largest religious monument in the world</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Bayon Temple">
+                    <div class="gallery-caption">
+                        <h3>Bayon Temple</h3>
+                        <p>Famous for its giant stone faces</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1494&q=80" alt="Ta Prohm">
+                    <div class="gallery-caption">
+                        <h3>Ta Prohm</h3>
+                        <p>Where nature and architecture intertwine</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Banteay Srei">
+                    <div class="gallery-caption">
+                        <h3>Banteay Srei</h3>
+                        <p>The "Citadel of Women" with exquisite carvings</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. James Wilson">
+                    <h3 class="member-name">Dr. James Wilson</h3>
+                    <p class="member-role">Lead Historian</p>
+                    <p>Expert in Southeast Asian history with 20 years of research experience.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Chen">
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <p class="member-role">Director</p>
+                    <p>Award-winning documentary filmmaker specializing in cultural heritage.</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Sok">
+                    <h3 class="member-name">David Sok</h3>
+                    <p class="member-role">Local Guide</p>
+                    <p>Cambodian native with deep knowledge of temple history and legends.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Contact Us</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <img src="https://cdn-icons-png.flaticon.com/512/8451/8451357.png" alt="Documentary Logo" class="footer-logo">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">2025 - All rights reserved. Provide by Mr. Phekdey PHORN</p>
+        </footer>
+    </div>
+
+    <!-- Khmer Content -->
+    <div class="khmer-content">
+        <!-- Header -->
+        <header>
+            <video class="header-video" autoplay muted loop>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-ruins-of-an-ancient-temple-12150-large.mp4" type="video/mp4">
+            </video>
+            <img src="https://cdn-icons-png.flaticon.com/512/8451/8451357.png" alt="Documentary Logo" class="logo">
+            <div class="header-content">
+                <h1>អារ្យធម៌ខ្មែរ</h1>
+                <p class="tagline">ការរកឃើញអាថ៌កំបាំងដែលបាត់បង់នៃចក្រភពខ្មែរ</p>
+                <div>
+                    <a href="#watch" class="btn">មើលឥឡូវ</a>
+                    <a href="#trailer" class="btn btn-outline">មើលវីដេអូខ្លី</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">អំពីឯកសារភាពយន្ត</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>ឯកសារភាពយន្តដ៏អស្ចារ្យនេះស្វែងយល់អំពីប្រវត្តិសាស្ត្រដ៏សម្បូរបែប និងស្ថាបត្យកម្មដ៏អស្ចារ្យនៃចក្រភពខ្មែរ ដែលគ្រប់គ្រងលើភាគច្រើននៃអាស៊ីអាគ្នេយ៍ពីសតវត្សទី៩ ដល់ទី១៥។</p>
+                    <p>តាមរយៈការថតដ៏អស្ចារ្យ និងស meeting មតិអ្នកជំនាញ យើងបានបង្ហាញអាថ៌កំបាំងនៅពីក្រោយអង្គរវត្ត និងប្រាសាទដទៃទៀតដ៏អស្ចារ្យ ដោយបង្ហាញពីវិស្វកម្មដែលទាន់សម័យ ស្នាដៃសិល្បៈ និងជំរៅខាងផ្លូវចិត្តនៃអរិយធម៌បុរាណនេះ។</p>
+                    <p>ចូលរួមជាមួយយើងក្នុងការធ្វើដំណើរឆ្លងកាត់ពេលវេលា ខណៈពេលដែលយើងភ្ជាប់គ្នានូវរឿងរ៉ាវនៃចក្រភពដ៏អស្ចារ្យបំផុតមួយក្នុងប្រវត្តិសាស្ត្រ។</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="ប្រាសាទអង្គរវត្ត">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2 class="section-title">លក្ខណៈពិសេសនៃឯកសារភាពយន្ត</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3 class="feature-title">ស្ថាបត្យកម្មបុរាណ</h3>
+                    <p>ស្វែងយល់អំពីអស្ចារ្យនៃស្ថាបត្យកម្មប្រាសាទខ្មែរ និងការរៀបចំទីក្រុងដែលនៅតែធ្វើឱ្យអ្នកស្ថាបត្យកម្មភ្ញាក់ផ្អើលរហូតដល់សព្វថ្ងៃ។</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="feature-title">ប្រព័ន្ធធារាសាស្ត្រ</h3>
+                    <p>រកឃើញប្រព័ន្ធគ្រប់គ្រងទឹកដ៏ច្បាស់លាស់ដែលជួយរក្សាភាពរុងរឿងខាងកសិកម្មនៃចក្រភព។</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="feature-title">ប្រវត្តិសាស្ត្រដែលបាត់បង់</h3>
+                    <p>រកឃើញមូលហេតុនៃការធ្លាក់ចុះនៃចក្រភព និងអាថ៌កំបាំងដែលនៅតែមិនទាន់បានដោះស្រាយ។</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2 class="section-title">វិចិត្រសាល</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="អង្គរវត្ត">
+                    <div class="gallery-caption">
+                        <h3>អង្គរវត្ត</h3>
+                        <p>ប្រាសាទដ៏ធំបំផុតនៅលើពិភពលោក</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="ប្រាសាទបាយ័ន">
+                    <div class="gallery-caption">
+                        <h3>ប្រាសាទបាយ័ន</h3>
+                        <p>ល្បីដោយសាររូបចំលាក់ថ្មដ៏ធំ</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1494&q=80" alt="តាព្រហ្ម">
+                    <div class="gallery-caption">
+                        <h3>តាព្រហ្ម</h3>
+                        <p>កន្លែងដែលធម្មជាតិ និងស្ថាបត្យកម្មចូលរួមគ្នា</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="បន្ទាយស្រី">
+                    <div class="gallery-caption">
+                        <h3>បន្ទាយស្រី</h3>
+                        <p>"ប្រាសាទស្ត្រី" ដែលមានចំលាក់ដ៏ល្អវិចិត្រ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <h2 class="section-title">ក្រុមការងាររបស់យើង</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="វេជ្ជបណ្ឌិត James Wilson">
+                    <h3 class="member-name">វេជ្ជបណ្ឌិត James Wilson</h3>
+                    <p class="member-role">អ្នកប្រវត្តិសាស្ត្រនាយក</p>
+                    <p>អ្នកជំនាញខាងប្រវត្តិសាស្ត្រអាស៊ីអាគ្នេយ៍ដែលមានបទពិសោធន៍ក្នុងការស្រាវជ្រាវអស់រយៈពេល 20 ឆ្នាំ។</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Chen">
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <p class="member-role">អ្នកដឹកនាំ</p>
+                    <p>អ្នកផលិតឯកសារភាពយន្តដែលឈ្នះពានរង្វាន់ ជំនាញខាងមរតកវប្បធម៌។</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Sok">
+                    <h3 class="member-name">David Sok</h3>
+                    <p class="member-role">អ្នកណែនាំក្នុងស្រុក</p>
+                    <p>ជនជាតិខ្មែរដែលមានចំណេះដឹងជ្រៅជ្រះអំពីប្រវត្តិសាស្ត្រប្រាសាទ និងរឿងព្រេង។</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">ទាក់ទងមកយើងខ្ញុំ</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name-kh">ឈ្មោះ</label>
+                    <input type="text" id="name-kh" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-kh">អ៊ីមែល</label>
+                    <input type="email" id="email-kh" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message-kh">សារ</label>
+                    <textarea id="message-kh" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">ផ្ញើសារ</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <img src="https://cdn-icons-png.flaticon.com/512/8451/8451357.png" alt="Documentary Logo" class="footer-logo">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">2025 - រក្សារ​សិទ្ធិ​គ្រប់​យ៉ាង ដោយលោក ផន ភក្ដី។</p>
+        </footer>
+    </div>
+
+    <script>
+        // Gallery animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            galleryItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // Fixed language toggle functionality
+            const languageToggle = document.getElementById('language-toggle');
+            
+            // Set initial language based on checkbox state
+            updateLanguage();
+            
+            // Update language when toggle changes
+            languageToggle.addEventListener('change', updateLanguage);
+            
+            // Also make the Khmer/English labels clickable
+            document.querySelectorAll('.language-switch label').forEach(label => {
+                if (label.htmlFor !== 'language-toggle') {
+                    label.addEventListener('click', function() {
+                        languageToggle.checked = !languageToggle.checked;
+                        languageToggle.dispatchEvent(new Event('change'));
+                    });
+                }
+            });
+            
+            function updateLanguage() {
+                if (languageToggle.checked) {
+                    document.querySelector('.english-content').style.display = 'none';
+                    document.querySelector('.khmer-content').style.display = 'block';
+                    document.documentElement.lang = 'km';
+                } else {
+                    document.querySelector('.english-content').style.display = 'block';
+                    document.querySelector('.khmer-content').style.display = 'none';
+                    document.documentElement.lang = 'en';
+                }
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
